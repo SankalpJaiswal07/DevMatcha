@@ -81,7 +81,9 @@ requestRouter.post(
       });
 
       if (!connectionRequest) {
-        return res.status(404).json({ message: "Connection not found" });
+        return res
+          .status(404)
+          .json({ message: "Connection request not found" });
       }
 
       connectionRequest.status = status;
