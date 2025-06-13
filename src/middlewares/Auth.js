@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const JWT_TOKEN = process.env.JWT_TOKEN;
+
 const userAuth = async (req, res, next) => {
   try {
     const { token } = req.cookies;
@@ -7,7 +9,7 @@ const userAuth = async (req, res, next) => {
       return res.status(401).json({ message: "Please Login!" });
     }
 
-    const decodedObj = await jwt.verify(token, "DEV@MATCHA");
+    const decodedObj = await jwt.verify(token, JWT_TOKEN);
     const { _id } = decodedObj;
 
     const user = await User.findById(_id);
